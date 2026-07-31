@@ -1,393 +1,71 @@
-# WhatsApp Baileys Obito
+# <p align="center">YakuzaXsilence/bails</p>
 
 <p align="center">
-  <img src="https://files.catbox.moe/v9rme1.jpg" alt="Thumbnail" />
+  <img src="https://readme-typing-svg.herokuapp.com?font=Orbitron&weight=700&size=35&duration=3000&pause=1000&color=00FFD1&center=true&vCenter=true&width=600&height=80&lines=YakuzaXsilence%2Fbails;WhatsApp+Modified+Library;Complete+Baileys+API" alt="Typing SVG" />
 </p>
 
-WhatsApp Baileys is an open-source library designed to help developers build automation solutions and integrations with WhatsApp efficiently and directly. Using websocket technology without the need for a browser, this library supports a wide range of features such as message management, chat handling, group administration, as well as interactive messages and action buttons for a more dynamic user experience.
+<p align="center">
+  <img src="https://img.shields.io/badge/Node.js-20%2B-339933?style=for-the-badge&logo=node.js&logoColor=white" />
+  <img src="https://img.shields.io/badge/License-GPLv3-blue?style=for-the-badge&logo=gnu&logoColor=white" />
+  <img src="https://img.shields.io/badge/Version-2.4.11-brightgreen?style=for-the-badge&logo=npm&logoColor=white" />
+</p>
 
-Actively developed and maintained, baileys continuously receives updates to enhance stability and performance. One of the main focuses is to improve the pairing and authentication processes to be more stable and secure. Pairing features can be customized with your own codes, making the process more reliable and less prone to interruptions.
+## <span style="color: #00FFD1; text-shadow: 0 0 10px #00FFD1, 0 0 20px #00FFD1, 0 0 40px #00FFD1;">⚡ Instalasi</span>
 
-This library is highly suitable for building business bots, chat automation systems, customer service solutions, and various other communication automation applications that require high stability and comprehensive features. With a lightweight and modular design, baileys is easy to integrate into different systems and platforms.
+"dependencies": {
+  "YakuzaXsilence/bails": "^2.0.0"
+}
+jimp sudah include — tidak perlu install jimp terpisah.
 
----
+<span style="color: #FF6B6B; text-shadow: 0 0 10px #FF6B6B, 0 0 20px #FF6B6B, 0 0 40px #FF6B6B;">📦 Import</span>
+javascript
+const { default: makeWASocket, DisconnectReason } = require('YakuzaXsilence/bails');
+<span style="color: #FFD93D; text-shadow: 0 0 10px #FFD93D, 0 0 20px #FFD93D, 0 0 40px #FFD93D;">🚀 Fitur</span>
+Fix memory leak & CPU — mutex + offline batching + WeakMap cache
 
-### Main Features and Advantages
+Anti-banned error 463 (Reachout Timelock)
 
-- Supports automatic and custom pairing processes
-- Fixes previous pairing issues that often caused failures or disconnections
-- Supports interactive messages, action buttons, and dynamic menus
-- Efficient automatic session management for reliable operation
-- Compatible with the latest multi-device features from WhatsApp
-- Lightweight, stable, and easy to integrate into various systems
-- Suitable for developing bots, automation, and complete communication solutions
-- Comprehensive documentation and example codes to facilitate development
+Protokol WA terbaru: LID mapping, TC Tokens, App State sync
 
----
+Newsletter v2, Album message, @all mention (mentionAll: true)
 
-## Getting Started
+jimp auto-include
 
-Begin by installing the library via your preferred package manager, then follow the provided configuration guide. You can also utilize the ready-made example codes to understand how the features work. Use session storage and interactive messaging features to build complete, stable solutions tailored to your business or project needs.
+CommonJS — kompatibel require()
 
----
+Shortcut Helpers
+sendText, sendImage, sendVideo, sendAudio, sendDocument
 
-## Add Function ( Simple code )
+sendPoll, sendQuiz, sendLocation, sendPtv
 
-### Check ID Channel
-Get ID channel 
+statusMention
 
-```javascript
-await sock.newsletterId(url)
-```
+Extended Messages
+requestPaymentMessage, productMessage, albumMessage
 
-### Check banned number
-You can see the status of blocked numbers here 
+eventMessage, pollResultMessage, orderMessage
 
-```javascript
-await sock.checkWhatsApp(target)
-```
+groupStatus, groupLabel
 
----
+interactiveMessage
 
-## SendMessage Documentation
+<span style="color: #6BCB77; text-shadow: 0 0 10px #6BCB77, 0 0 20px #6BCB77, 0 0 40px #6BCB77;">💻 Contoh Penggunaan</span>
+javascript
+await sock.sendText(jid, 'Hello');
+await sock.sendImage(jid, { url: './foto.jpg' }, 'caption');
 
-### Status Group Message V2
-Send group status with version 2 
-
-```javascript
-await sock.sendMessage(target, {
-     groupStatusMessage: {
-          text: "#OBITO"
-     }
+await sock.sendMessage(jid, {
+  albumMessage: [
+    { image: buffer1, caption: 'foto 1' },
+    { image: { url: 'https://...' }, caption: 'foto 2' }
+  ]
 });
-```
 
-### Album Message (Multiple Images)
-Send multiple images in a single album message:
+await sock.sendMessage(jid, {
+  text: 'Halo semua!',
+  mentionAll: true
+});
+<span style="color: #A66CFF; text-shadow: 0 0 10px #A66CFF, 0 0 20px #A66CFF, 0 0 40px #A66CFF;">📋 Persyaratan</span>
+Node.js >= 20
 
-```javascript
-await sock.sendMessage(target, { 
-    albumMessage: [
-        { image: cihuy, caption: "#OBITO" },
-        { image: { url: "URL IMAGE" }, caption: "#OBITO" }
-    ] 
-}, { quoted: m });
-```
-
-### Event Message
-Create and send WhatsApp event invitations:
-
-```javascript
-await sock.sendMessage(target, { 
-    eventMessage: { 
-        isCanceled: false, 
-        name: "#OBITO", 
-        description: "#OBITO", 
-        location: { 
-            degreesLatitude: 0, 
-            degreesLongitude: 0, 
-            name: "#OBITO" 
-        }, 
-        joinLink: "https://call.whatsapp.com/video/obito2", 
-        startTime: "1763019000", 
-        endTime: "1763026200", 
-        extraGuestsAllowed: false 
-    } 
-}, { quoted: m });
-```
-
-### Poll Result Message
-Display poll results with vote counts:
-
-```javascript
-await sock.sendMessage(target, { 
-    pollResultMessage: { 
-        name: "#OBITO", 
-        pollVotes: [
-            {
-                optionName: "#OBITO",
-                optionVoteCount: "112233"
-            },
-            {
-                optionName: "#OBITO",
-                optionVoteCount: "1"
-            }
-        ] 
-    } 
-}, { quoted: m });
-```
-
-### Simple Interactive Message
-Send basic interactive messages with copy button functionality:
-
-```javascript
-await sock.sendMessage(target, {
-    interactiveMessage: {
-        header: "#OBITO",
-        title: "#OBITO",
-        footer: "telegram: @topsdominic ",
-        buttons: [
-            {
-                name: "cta_copy",
-                buttonParamsJson: JSON.stringify({
-                    display_text: "#OBITO",
-                    id: "123456789",              
-                    copy_code: "ABC123XYZ"
-                })
-            }
-        ]
-    }
-}, { quoted: m });
-```
-
-### Interactive Message with Native Flow
-Send interactive messages with buttons, copy actions, and native flow features:
-
-```javascript
-await sock.sendMessage(target, {    
-    interactiveMessage: {      
-        header: "#OBITO",
-        title: "#OBITO",      
-        footer: "telegram: @topsdominic",      
-        image: { url: "https://example.com/image.jpg" },      
-        nativeFlowMessage: {        
-            messageParamsJson: JSON.stringify({          
-                limited_time_offer: {            
-                    text: "idk hummmm?",            
-                    url: "https://t.me/topsdominic",            
-                    copy_code: "#OBITO",            
-                    expiration_time: Date.now() * 999          
-                },          
-                bottom_sheet: {            
-                    in_thread_buttons_limit: 2,            
-                    divider_indices: [1, 2, 3, 4, 5, 999],            
-                    list_title: "#OBITO",            
-                    button_title: "#OBITO"          
-                },          
-                tap_target_configuration: {            
-                    title: " X ",            
-                    description: "bomboclard",            
-                    canonical_url: "https://t.me/topsdominic",            
-                    domain: "shop.example.com",            
-                    button_index: 0          
-                }        
-            }),        
-            buttons: [          
-                {            
-                    name: "single_select",            
-                    buttonParamsJson: JSON.stringify({              
-                        has_multiple_buttons: true            
-                    })          
-                },          
-                {            
-                    name: "call_permission_request",            
-                    buttonParamsJson: JSON.stringify({              
-                        has_multiple_buttons: true            
-                    })          
-                },          
-                {            
-                    name: "single_select",            
-                    buttonParamsJson: JSON.stringify({              
-                        title: "#OBITO",              
-                        sections: [                
-                            {                  
-                                title: "title",                  
-                                highlight_label: "label",                  
-                                rows: [                    
-                                    {                      
-                                        title: "@topsdominic",                      
-                                        description: "love you",                      
-                                        id: "row_2"                    
-                                    }                  
-                                ]                
-                            }              
-                        ],              
-                        has_multiple_buttons: true            
-                    })          
-                },          
-                {            
-                    name: "cta_copy",            
-                    buttonParamsJson: JSON.stringify({              
-                        display_text: "copy code",              
-                        id: "123456789",              
-                        copy_code: "ABC123XYZ"            
-                    })          
-                }        
-            ]      
-        }    
-    }  
-}, { quoted: m });
-```
-
-### Interactive Message with Thumbnail
-Send interactive messages with thumbnail image and copy button:
-
-```javascript
-await sock.sendMessage(target, {
-    interactiveMessage: {
-        header: "#OBITO",
-        title: "#OBITO",
-        footer: "telegram: @topsdominic",
-        image: { url: "https://example.com/image.jpg" },
-        buttons: [
-            {
-                name: "cta_copy",
-                buttonParamsJson: JSON.stringify({
-                    display_text: "copy code",
-                    id: "123456789",
-                    copy_code: "ABC123XYZ"
-                })
-            }
-        ]
-    }
-}, { quoted: m });
-```
-
-### Product Message
-Send product catalog messages with buttons and merchant information:
-
-```javascript
-await sock.sendMessage(target, {
-    productMessage: {
-        title: "Produk Contoh",
-        description: "Ini adalah deskripsi produk",
-        thumbnail: { url: "https://example.com/image.jpg" },
-        productId: "PROD001",
-        retailerId: "RETAIL001",
-        url: "https://example.com/product",
-        body: "Detail produk",
-        footer: "Harga spesial",
-        priceAmount1000: 50000,
-        currencyCode: "USD",
-        buttons: [
-            {
-                name: "cta_url",
-                buttonParamsJson: JSON.stringify({
-                    display_text: "Beli Sekarang",
-                    url: "https://example.com/buy"
-                })
-            }
-        ]
-    }
-}, { quoted: m });
-```
-
-### Interactive Message with Document Buffer
-Send interactive messages with document from buffer (file system) - **Note: Documents only support buffer**:
-
-```javascript
-await sock.sendMessage(target, {
-    interactiveMessage: {
-        header: "#OBITO",
-        title: "#OBITO",
-        footer: "telegram: @topsdominic",
-        document: fs.readFileSync("./package.json"),
-        mimetype: "application/pdf",
-        fileName: "topsdominic.pdf",
-        jpegThumbnail: fs.readFileSync("./document.jpeg"),
-        contextInfo: {
-            mentionedJid: [target],
-            forwardingScore: 777,
-            isForwarded: false
-        },
-        externalAdReply: {
-            title: "#OBITO",
-            body: "#OBITO",
-            mediaType: 3,
-            thumbnailUrl: "https://example.com/image.jpg",
-            mediaUrl: " X ",
-            sourceUrl: "https://t.me/topsdominic",
-            showAdAttribution: true,
-            renderLargerThumbnail: false         
-        },
-        buttons: [
-            {
-                name: "cta_url",
-                buttonParamsJson: JSON.stringify({
-                    display_text: "Telegram",
-                    url: "https://t.me/topsdominic",
-                    merchant_url: "https://t.me/topsdominic"
-                })
-            }
-        ]
-    }
-}, { quoted: m });
-```
-
-### Interactive Message with Document Buffer (Simple)
-Send interactive messages with document from buffer (file system) without contextInfo and externalAdReply - **Note: Documents only support buffer**:
-
-```javascript
-await sock.sendMessage(target, {
-    interactiveMessage: {
-        header: "#OBITO",
-        title: "#OBITO",
-        footer: "telegram: @topsdominic",
-        document: fs.readFileSync("./package.json"),
-        mimetype: "application/pdf",
-        fileName: "topsdominic.pdf",
-        jpegThumbnail: fs.readFileSync("./document.jpeg"),
-        buttons: [
-            {
-                name: "cta_url",
-                buttonParamsJson: JSON.stringify({
-                    display_text: "Telegram",
-                    url: "https://t.me/topsdominic",
-                    merchant_url: "https://t.me/topsdominic"
-                })
-            }
-        ]
-    }
-}, { quoted: m });
-```
-
-### Request Payment Message
-Send payment request messages with custom background and sticker:
-
-```javascript
-let quotedType = m.quoted?.mtype || '';
-let quotedContent = JSON.stringify({ [quotedType]: m.quoted }, null, 2);
-
-await sock.sendMessage(target, {
-    requestPaymentMessage: {
-        currency: "IDR",
-        amount: 10000000,
-        from: m.sender,
-        sticker: JSON.parse(quotedContent),
-        background: {
-            id: "100",
-            fileLength: "0",
-            width: 1000,
-            height: 1000,
-            mimetype: "image/webp",
-            placeholderArgb: 0xFF00FFFF,
-            textArgb: 0xFFFFFFFF,     
-            subtextArgb: 0xFFAA00FF   
-        }
-    }
-}, { quoted: m });
-```
-
----
-
-## Why Choose WhatsApp Baileys?
-
-Because this library offers high stability, full features, and an actively improved pairing process. It is ideal for developers aiming to create professional and secure WhatsApp automation solutions. Support for the latest WhatsApp features ensures compatibility with platform updates.
-
----
-
-### Technical Notes
-
-- Supports custom pairing codes that are stable and secure
-- Fixes previous issues related to pairing and authentication
-- Features interactive messages and action buttons for dynamic menu creation
-- Automatic and efficient session management for long-term stability
-- Compatible with the latest multi-device features from WhatsApp
-- Easy to integrate and customize based on your needs
-- Perfect for developing bots, customer service automation, and other communication applications
-
----
-
-For complete documentation, installation guides, and implementation examples, please visit the official repository and community forums. We continually update and improve this library to meet the needs of developers and users of modern WhatsApp automation solutions.
-
-**Thank you for choosing WhatsApp Baileys as your WhatsApp automation solution!**
+<p align="center"> <img src="https://readme-typing-svg.herokuapp.com?font=Orbitron&weight=700&size=20&duration=3000&pause=1000&color=00FFD1&center=true&vCenter=true&width=500&height=40&lines=YakuzaXsilence%2Fbails;Made+with+%E2%9D%A4%EF%B8%8F;For+WhatsApp+Automation" alt="Footer Typing SVG" /> </p><p align="center"> <a href="https://github.com/YakuzaXsilence/bails"> <img src="https://img.shields.io/badge/GitHub-YakuzaXsilence%2Fbails-181717?style=for-the-badge&logo=github&logoColor=white" /> </a> </p> 
