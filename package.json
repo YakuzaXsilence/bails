@@ -1,8 +1,8 @@
 {
-    "name": "YakuzaXsilence/bails",
+    "name": "YakuzaXsilence",
     "type": "module",
     "version": "8.4.1",
-    "description": "WhatsApp API Modification ",
+    "description": "WhatsApp API Modification",
     "keywords": [
     "whatsapp",
     "baileys"
